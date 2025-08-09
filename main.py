@@ -27,7 +27,7 @@ token2 = "tokens/token2.json"
 
 ######################################################
 # this is the part of google generative ai           #
-# this part is responsible for generating translaion #
+# this part is responsible for generating lecturers  #
 ###################################################### 
 
 def aiTranslator(SCOPES,DOCUEMNT_ID):
