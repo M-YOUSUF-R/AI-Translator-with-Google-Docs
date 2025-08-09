@@ -25,10 +25,10 @@ c2 = "credentials/credentials2.json";
 token2 = "tokens/token2.json"
 
 
-######################################################
-# this is the part of google generative ai           #
-# this part is responsible for generating lecturers  #
-###################################################### 
+#######################################################
+# this is the part of google generative ai            #
+# this part is responsible for generating translation #
+####################################################### 
 
 def aiTranslator(SCOPES,DOCUEMNT_ID):
     client =  ai.Client(api_key=os.getenv('API_KEY'));
