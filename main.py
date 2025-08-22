@@ -1,11 +1,30 @@
 from google import genai as ai
 from dotenv import load_dotenv
 from docsApi import readText,insertText,deleteALLText
-import msvcrt as ms
+import platform
+import os
+import subprocess
+import sys
+
+if platform.system() == 'Windows':
+    import msvcrt as ms
+else:
+
+    module_name = 'getch'
+    try:
+        import getch as ms
+        # Attempt to install the module
+    except ImportError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", module_name])
+        print(f"Successfully installed {module_name}")
+        import getch as ms
+    except subprocess.CalledProcessError as e:
+        print(f"Error installing {module_name}: {e}")
+    except FileNotFoundError:
+        print("Error: pip command not found. Ensure Python and pip are installed and in your PATH.")
+
 load_dotenv();
 
-
-import os
 
 
 prompt = "As a professional translator, analyze the following text to understand its meaning, context, and intent. Then, translate it into fluent and natural English, using appropriate vocabulary and phrasing,translate the text and think internally to understand its meaning, context and intent.Only translate the text that is under the 'input:' label and do not translate the text that is under or with the 'output:' label.After translation, output the entire text in the following format:'output:\n[translated English text]'.Do not output any analysis, explanation. the text is: \n";
@@ -60,6 +79,7 @@ def aiTranslator(SCOPES,DOCUEMNT_ID):
             if ms.kbhit():
                 if(ms.getch() == '\x1b'):
                     break;
+            
         else:
             if(userInput):
                 print('exit,due to user pressed: ',userInput)
